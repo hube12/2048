@@ -1,0 +1,41 @@
+#grille{
+    width: 82vh;
+    height: 80vh;
+    border: 3px solid grey;
+    background: #bbada0; /* Old browsers */
+    background: -moz-linear-gradient(top, #d5cea6 0%, #c9c190 40%, #b7ad70 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #d5cea6 0%,#c9c190 40%,#b7ad70 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #d5cea6 0%,#c9c190 40%,#b7ad70 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5cea6', endColorstr='#b7ad70',GradientType=0 ); /* IE6-9 */
+    margin:auto;
+    margin-top:9vh;
+}
+.cell{
+    width: 20vh;
+    height: 20vh;
+    border: solid 2px  rgba(117, 122, 106, 0.8);
+    
+}
+.dalle{
+    background: #ccc0b3;
+    width: 18vh;
+    height: 18vh;
+    border: 2px solid grey;
+    border-radius: 20%;
+    text-align: center;
+    line-height: 18vh;
+    margin:auto;
+    font-size: 2em;
+}
+.table{
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+body{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
