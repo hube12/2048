@@ -23,7 +23,7 @@
         }
         table.classList.add("table")
         var div = document.getElementById('grille');
-        if (div.hasChildNodes()) //just in case, dynamic website are too harsh
+        if (div.hasChildNodes())
         {
             div.removeChild(div.childNodes[0]);
         }
@@ -193,43 +193,9 @@
     start()
     start()
     document.addEventListener("click", appear)
-    //document.addEventListener("mousemove", action)
     document.addEventListener("mousedown", mouseDown)
     document.addEventListener("mouseup", mouseUp)
-    function action(event) {
-        //bad approch
-                    if (current.hasChildNodes() && i != 3 && false) {
-                        var enfant = current.firstChild
-                        var next = document.getElementById(dep + (dr * (i + 4 * v)) % 15 + dr)
-                        console.log(next)
-                        console.log(enfant, next)
-                        if (next.hasChildNodes()) {
-                            nextEnfant = next.firstChild
-                            if (nextEnfant.innerHTML == enfant.innerHTML && nextEnfant.getAttribute("alt") == null) {
-                                current.removeChild(enfant)
-                                nextEnfant.innerHTML *= 2
-                                nextEnfant.setAttribute("alt", "double")
-                            }
-                        }
-                        else {
-                            current.removeChild(enfant)
-                            next.appendChild(enfant)
-                        }
-                        //bulshit fix with p boucle
-                        for (y = 0; y < 0; y++) {
-                            var prec = document.getElementById(dep + (dr * (i + 4 * v)) % 15 - y * dr)
-                            console.log(dep + (dr * (i + 4 * v)) % 15 - y * dr, dep + (dr * (i + 4 * v)) % 15 - (y - 1) * dr)
-                            var current = document.getElementById(dep + (dr * (i + 4 * v)) % 15 - (y - 1) * dr)
-                            if (prec != null && current != null) {
-                                if (prec.hasChildNodes() && !current.hasChildNodes()) {
-                                    prec.removeChild(prec.firstChild)
-                                    current.appendChild(prec.firstChild)
-                                }
-                            }
-                        }
-                        //end of bullshit
-                    }
-    }
+    
 </script>
 
 </html>
