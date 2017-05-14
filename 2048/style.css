@@ -1,22 +1,27 @@
-#grille{
+#grille {
     width: 82vh;
     height: 80vh;
     border: 3px solid grey;
-    background: #bbada0; /* Old browsers */
-    background: -moz-linear-gradient(top, #d5cea6 0%, #c9c190 40%, #b7ad70 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #d5cea6 0%,#c9c190 40%,#b7ad70 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #d5cea6 0%,#c9c190 40%,#b7ad70 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5cea6', endColorstr='#b7ad70',GradientType=0 ); /* IE6-9 */
-    margin:auto;
-    margin-top:9vh;
+    background: #bbada0;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #d5cea6 0%, #c9c190 40%, #b7ad70 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #d5cea6 0%, #c9c190 40%, #b7ad70 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #d5cea6 0%, #c9c190 40%, #b7ad70 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#d5cea6', endColorstr='#b7ad70', GradientType=0);
+    /* IE6-9 */
+    margin: auto;
 }
-.cell{
+
+.cell {
     width: 20vh;
     height: 20vh;
-    border: solid 2px  rgba(117, 122, 106, 0.8);
-    
+    border: solid 2px rgba(117, 122, 106, 0.8);
 }
-.dalle{
+
+.dalle {
     background: #ccc0b3;
     width: 18vh;
     height: 18vh;
@@ -24,18 +29,98 @@
     border-radius: 20%;
     text-align: center;
     line-height: 18vh;
-    margin:auto;
+    margin: auto;
     font-size: 2em;
 }
-.table{
+
+.table {
     table-layout: fixed;
     border-collapse: collapse;
 }
-body{
+
+body {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+#buttons {
+    width: 82vh;
+    height: 10vh;
+    border: 3px solid grey;
+    margin: auto;
+    border-bottom: none;
+    background: #d0e4f7;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #d0e4f7 0%, #73b1e7 24%, #0a77d5 50%, #539fe1 79%, #87bcea 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #d0e4f7 0%, #73b1e7 24%, #0a77d5 50%, #539fe1 79%, #87bcea 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #d0e4f7 0%, #73b1e7 24%, #0a77d5 50%, #539fe1 79%, #87bcea 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#d0e4f7', endColorstr='#87bcea', GradientType=0);
+    /* IE6-9 */
+}
+#retour{
+    float:right;
+    width: 5vh;
+    height: 5vh;
+    margin-top: 2.5vh;
+    background-image: url(retour.png);
+    background-size: cover;
+    cursor:pointer;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #90e845;
+    margin: 10% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    text-align: center;
+    height: 40vh;
+    color:brown;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 2em;
+    font-weight: bold;
+    transform: translate(1.5vh,-2vh)
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.pause{
+    font-size: 2em;
+    float: right;
+    width: 15vh;
+    height: 5vh;
+    margin-top: 2.5vh;
+    cursor:pointer;
+    
 }

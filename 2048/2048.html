@@ -5,13 +5,53 @@
     <link rel="stylesheet" type="text/css" href="style.css" /> </head>
 
 <body>
+    <div id="buttons">
+        <div id="retour" onclick="restore()"></div>
+        <div id="score" class="pause">0</div>
+        <div id="recommencer" class="pause"onclick="generate()
+            start()
+            start()
+            ave()">Reload</div>
+        <div id="pause" class="pause">Pause</div>
+    </div>
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content"> <span class="close">&times;</span> <div>PAUSE</div>
+        <img src="singe.gif"></div>
+    </div>
     <div id="grille"></div>
 </body>
 <script>
-    var isMouseDown = false;
+    var isMouseDown = false
+        , pause = false;
     var deltaX, deltaY;
+    var score=0;
+    // Get the modal
+    var modal = document.getElementById('myModal');
+    // Get the button that opens the modal
+    var btn = document.getElementById("pause");
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    // When the user clicks on the button, open the modal 
+    btn.onclick = function () {
+            modal.style.display = "block";
+            ause()
+        }
+        // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+            modal.style.display = "none";
+            ause()
+        }
+        // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            ause()
+        }
+    }
 
     function generate() {
+        localStorage.clear()
         var table = document.createElement("table")
         for (i = 0; i < 4; i++) {
             var row = table.insertRow(i)
@@ -23,7 +63,7 @@
         }
         table.classList.add("table")
         var div = document.getElementById('grille');
-        if (div.hasChildNodes())
+        if (div.hasChildNodes()) //just in case, dynamic website are too harsh
         {
             div.removeChild(div.childNodes[0]);
         }
@@ -43,17 +83,46 @@
         var el = document.createElement("div")
         el.innerHTML = dalle
         el.classList.add("dalle")
-        if (dalle == 2) {
-            el.style.background = "#eee4da"
-        }
-        else {
-            el.style.background = "#ede0c8"
-        }
         var parent = document.getElementById(position)
         if (parent.hasChildNodes()) {
             return start()
         }
+        if (dalle == 2) {
+            el.style.background = "#eee4da"
+        }
+        else {
+            el.style.background = "#8d8372"
+        }
+        
         parent.appendChild(el)
+    }
+
+    function ave() {
+        save = []
+        for (i = 0; i < 16; i++) {
+            var pos = document.getElementById(i)
+            if (pos.hasChildNodes()) {
+                save.push([i, pos.firstChild.innerHTML])
+            }
+        }
+        localStorage.setItem("current", JSON.stringify(save))
+        
+    }
+
+    function ause() {
+        pause = !pause
+        if (pause) {
+            modal.style.display = "block";
+            document.removeEventListener("keydown", keybind)
+            document.removeEventListener("mousedown", mouseDown)
+            document.removeEventListener("mouseup", mouseUp)
+        }
+        else{
+            modal.style.display = "none";
+            document.addEventListener("keydown", keybind)
+            document.addEventListener("mousedown", mouseDown)
+            document.addEventListener("mouseup", mouseUp)
+        }
     }
 
     function appear() {
@@ -64,6 +133,32 @@
         isMouseDown = true;
         deltaX = -event.clientX
         deltaY = event.clientY
+    }
+
+    function keybind(event) {
+        switch (Number(event.keyCode)) {
+        case 37:
+            moove(0, 1);
+            break;
+        case 38:
+            moove(0, 4);
+            break;
+        case 39:
+            moove(1, -1);
+            break;
+        case 40:
+            moove(1, -4);
+            break;
+        case 78:
+            generate()
+            start()
+            start()
+            ave()
+            break;
+        case 82:
+            restore()
+            break;
+        }
     }
 
     function mouseUp(event) {
@@ -96,15 +191,13 @@
         isMouseDown = false;
     }
 
-    
-
     function color(enfant) {
         switch (Number(enfant.innerHTML)) {
         case 2:
             b = "#eee4da";
             break;
         case 4:
-            b = "#ede0c8";
+            b = "#8d8372";
             break;
         case 8:
             b = "#f2b179";
@@ -136,11 +229,42 @@
         default:
             b = "#3c3a32"
         }
-        enfant.style.background=b
+        enfant.style.background = b
         return enfant
     }
 
+    function restore() {
+        var save = JSON.parse(localStorage.getItem("save"))
+        if (save != null) {
+            var total = document.querySelectorAll(".dalle")
+            while (total[0]) {
+                total[0].offsetParent.removeChild(total[0])
+                var total = document.querySelectorAll(".dalle")
+            }
+            for (i = 0; i < 16; i++) {
+                if (save[i] != null) {
+                    var div = document.getElementById(save[i][0])
+                    var el = document.createElement("div")
+                    el.innerHTML = save[i][1]
+                    el.classList.add("dalle")
+                    el = color(el)
+                    if (div.hasChildNodes()) {
+                        div.removeChild(div.firstChild)
+                    }
+                    div.appendChild(el)
+                }
+            }
+            
+            score=parseInt(localStorage.getItem("scoreSaved"))
+            document.getElementById("score").innerHTML=score
+            localStorage.setItem("current", JSON.stringify(save))
+            localStorage.setItem("save", null)
+        }
+    }
+
     function moove(pt, dr) {
+        localStorage.setItem("save", localStorage.getItem("current"))
+        localStorage.setItem("scoreSaved",score)
         var compte = 0
         if (pt == 0) {
             dep = 0
@@ -158,9 +282,10 @@
                             nextEnfant = next.firstChild
                             if (current.hasChildNodes()) {
                                 var enfant = current.firstChild
-                                if (nextEnfant.innerHTML == enfant.innerHTML && nextEnfant.getAttribute("info") == null) {
+                                if (nextEnfant.innerHTML == enfant.innerHTML && nextEnfant.getAttribute("info") == null && enfant.getAttribute("info") == null) {
                                     next.removeChild(nextEnfant)
                                     enfant.innerHTML *= 2
+                                    score+=parseInt(enfant.innerHTML)
                                     enfant = color(enfant)
                                     enfant.setAttribute("info", "double")
                                     compte += 1
@@ -173,10 +298,10 @@
                             }
                         }
                     }
-                    
                 }
             }
         }
+        localStorage.setItem("score",score)
         var total = document.querySelectorAll(".dalle")
         for (i = 0; i < total.length; i++) {
             total[i].removeAttribute("info")
@@ -188,14 +313,18 @@
         if (compte) {
             start()
         }
+        ave()
+        document.getElementById("score").innerHTML=score
     }
     generate()
     start()
     start()
+    ave()
     document.addEventListener("click", appear)
     document.addEventListener("mousedown", mouseDown)
     document.addEventListener("mouseup", mouseUp)
-    
+    document.addEventListener("keydown", keybind)
+    document.addEventListener("keydown",function(){if (Number(event.keyCode)==80){ause()}})
 </script>
 
 </html>
